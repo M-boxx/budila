@@ -1,0 +1,40 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">SmartAlarm</string>
+    <string name="title_activity_walk">WalkActivity</string>
+    <string name="title_activity_two">ActivityTwo</string>
+    <!-- Strings used for fragments for navigation -->
+    <style name="ega" parent="@android:style/Widget.Material.TimePicker" tools:targetApi="lollipop">
+        <item name="android:headerBackground">#4d79ff</item>
+        <item name="android:numbersTextColor">#000000</item>
+        <item name="android:numbersSelectorColor">#4d79ff</item>
+        <item name="android:timePickerMode">clock</item>
+    </style>
+
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <color name="green">#7FFFD4</color>
+    <color name="pink">#D91460</color>
+    <color name="yellow">#FFFF99</color>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_sleep">SleepActivity</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_setting">SettingActivity</string>
+</resources>

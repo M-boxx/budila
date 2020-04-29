@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/holo_red_light"
+    tools:context=".ActivityTwo">
+
+    <TextView
+        android:id="@+id/text5"
+        android:layout_width="match_parent"
+        android:paddingTop="20dp"
+        android:layout_height="300dp"
+        android:layout_gravity="fill_horizontal"
+        android:gravity="center"
+        android:text="Нельзя использовать другие приложения!"
+        android:textColor="@android:color/white"
+        android:textSize="45dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/angry_button"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@android:color/white"
+        android:text="Прости, я исправлюсь"
+        android:textColor="@android:color/holo_red_dark"
+        app:cornerRadius="20dp"
+        app:rippleColor="@android:color/holo_red_dark"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
