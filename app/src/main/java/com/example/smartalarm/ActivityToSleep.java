@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,8 +27,8 @@ public class ActivityToSleep extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final Context context = this;
@@ -35,6 +36,10 @@ public class ActivityToSleep extends AppCompatActivity {
         counter=11;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep);
+
+        TextView wtextView =(TextView) findViewById(R.id.timetext);
+        wtextView.setText(Integer.toString(MainActivity.instance().hours)+":"+Integer.toString(MainActivity.instance().minutes));
+
         startService(new Intent(this, ForegroundService.class));
         final Handler handler = new Handler();
         final Button button = findViewById(R.id.buttonback);
@@ -44,8 +49,10 @@ public class ActivityToSleep extends AppCompatActivity {
                 MainActivity.instance().alarmToggle.setChecked(false);
                 stopService(new Intent(context, ForegroundService.class));
                 MainActivity.instance().onToggleClicked(MainActivity.instance().alarmToggle);
-                Intent intent = new Intent(context, MainActivity.class);
-                startActivity(intent);
+                Intent questionIntent = new Intent(ActivityToSleep.this,
+                        MainActivity.class);
+                startActivityForResult(questionIntent, 0);
+                overridePendingTransition(0, R.anim.beta);
             }
         });
         handler.post(
@@ -59,5 +66,9 @@ public class ActivityToSleep extends AppCompatActivity {
                         } else button.setText("Осталось\n"+counter+" секунд для выхода");
                     }
                 });
+    }
+    void startAlarm(){
+        Intent intent = new Intent(this, WalkActivity.class);
+        startActivity(intent);
     }
 }

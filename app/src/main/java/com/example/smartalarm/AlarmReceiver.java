@@ -18,15 +18,11 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, Intent intent) {
-        //this will update the UI with message
         com.example.smartalarm.MainActivity inst = com.example.smartalarm.MainActivity.instance();
         inst.startingRoblox();
-        //this will sound the alarm tone
-        //this will sound the alarm once, if you wish to
-        //raise alarm in loop continuously then use MediaPlayer and setLooping(true)
+        com.example.smartalarm.ActivityToSleep inst2 = com.example.smartalarm.ActivityToSleep.instance();
+        inst2.startAlarm();
 
-
-        //this will send a notification message
         ComponentName comp = new ComponentName(context.getPackageName(),
                 com.example.smartalarm.AlarmService.class.getName());
         setResultCode(Activity.RESULT_OK);

@@ -39,6 +39,8 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     private int counter;
     private NotificationManager mNotificationManager;
     private AudioManager audioManager;
+    private int volume;
+    private int maxVolume;
 
     private static com.example.smartalarm.WalkActivity inst;
     public static com.example.smartalarm.WalkActivity instance() {
@@ -59,6 +61,8 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         changeInterruptionFiler(NotificationManager.INTERRUPTION_FILTER_ALL);
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        volume=audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
+        maxVolume=audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             ringtone.setLooping(true);
         }
@@ -139,7 +143,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(1000);
-        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, 10, 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume, 0);
         Log.d("MainActivity", "Сенсор изменился");
         float[] values = event.values;
         if (counter >= 3) {
@@ -155,6 +159,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                 stopService(new Intent(this, ForegroundService.class));
                 Intent intent = new Intent(this, MainActivity.class);
                 inst=null;
+                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
                 progressBar.setProgress(0);
                 startActivity(intent);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

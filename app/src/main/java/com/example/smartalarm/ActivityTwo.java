@@ -12,6 +12,12 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class ActivityTwo extends AppCompatActivity {
+
+    private static com.example.smartalarm.ActivityTwo inst;
+    public static com.example.smartalarm.ActivityTwo instance() {
+        return inst;
+    }
+
     private static Random random = new Random();
     public boolean egor = false;
     int counter;
@@ -51,5 +57,9 @@ public class ActivityTwo extends AppCompatActivity {
                 }
                 }
         });
+    }
+    void startAlarm(){
+        Intent intent = new Intent(this, WalkActivity.class);
+        startActivity(intent);
     }
 }

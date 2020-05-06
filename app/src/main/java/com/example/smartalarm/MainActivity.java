@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String CHANNEL1ID = "channel1";
     private final Context context = this;
 
+    public int minutes;
+    public int hours;
+
     private NotificationManagerCompat notificationManagerCompat;
     private AlarmManager alarmManager;
     public ToggleButton alarmToggle;
@@ -49,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
         inst = this;
     }
 
@@ -66,12 +68,15 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         //дефолт
         getSupportActionBar().hide();
         final Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        Intent permissionIntent = new Intent (this, PermissionActivity.class);
+        startActivity(permissionIntent);
+
         //рингтон
         final Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         createNotificationChannels();
@@ -134,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
             long now = Calendar.getInstance().getTimeInMillis();
             calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getCurrentHour());
             calendar.set(Calendar.MINUTE, alarmTimePicker.getCurrentMinute());
+            minutes = alarmTimePicker.getCurrentMinute();
+            hours = alarmTimePicker.getCurrentHour();
 
             Intent myIntent = new Intent(com.example.smartalarm.MainActivity.this, com.example.smartalarm.AlarmReceiver.class);
             pendingIntent = PendingIntent.getBroadcast(com.example.smartalarm.MainActivity.this, 0, myIntent, 0);
@@ -143,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent questionIntent = new Intent(MainActivity.this,
                         ActivityToSleep.class);
                 startActivityForResult(questionIntent, 0);
-                overridePendingTransition(R.anim.diagonal, R.anim.alpha);
+                overridePendingTransition(0, R.anim.alpha);
             } else {
                 Log.d("Сегодня", Long.toString(calendar.getTimeInMillis()));
                 alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
@@ -160,7 +167,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void startingRoblox() {
         alarmToggle.setChecked(false);
-        Intent intent = new Intent(this, WalkActivity.class);
-        startActivity(intent);
     }
 }

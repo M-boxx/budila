@@ -22,6 +22,16 @@ tools:context=".ActivityToSleep">
         tools:ignore="MissingConstraints"
         tools:targetApi="jelly_bean_mr1"
         tools:visibility="visible" />
+    <TextView
+        android:id="@+id/timetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="125dp"
+        android:textColor="@color/yellow"
+        android:textSize="50sp"
+       />
 
     <Button
         android:id="@+id/buttonback"

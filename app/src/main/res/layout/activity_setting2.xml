@@ -17,36 +17,4 @@
         android:layout_marginRight="8dp"
         android:layout_alignParentRight="true"
         tools:ignore="VectorDrawableCompat" />
-
-    <EditText
-        android:layout_width="344dp"
-        android:layout_height="76dp"
-        android:id="@+id/permtext"
-        android:layout_centerHorizontal="true"
-        android:text="У вас не выданы разрешения!"
-        android:textSize="20sp"></EditText>
-
-    <Button
-        android:id="@+id/usage"
-        android:text="История"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/permtext"
-        android:layout_height="wrap_content"></Button>
-
-    <Button
-        android:id="@+id/dont"
-        android:text="Беззвучка"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/permtext"
-        android:layout_toEndOf="@+id/usage"
-        android:layout_height="wrap_content"></Button>
-
-    <Button
-        android:id="@+id/vspliv"
-        android:text="всплывающие окна"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/permtext"
-        android:layout_toEndOf="@+id/dont"
-        android:layout_height="wrap_content"></Button>
-
 </RelativeLayout>

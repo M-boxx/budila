@@ -20,9 +20,13 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SettingActivity"
+            android:name=".PermissionActivity"
+            android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar"
             ></activity>
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ActivityTwo"
             android:label="@string/title_activity_two"

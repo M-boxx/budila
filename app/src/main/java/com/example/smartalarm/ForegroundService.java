@@ -103,9 +103,9 @@ public class ForegroundService extends Service {
         }
 
         return new NotificationCompat.Builder(this, channelId)
-                .setContentTitle("AndroidMonks Sticker")
-                .setTicker("AndroidMonks Sticker")
-                .setContentText("Example")
+                .setContentTitle("Слежу за твоим сном")
+                .setTicker("Не заходи в другие приложения")
+                .setContentText("Спи!")
                 .setSmallIcon(notificationIconResource)
                 .setOngoing(true).build();
     }

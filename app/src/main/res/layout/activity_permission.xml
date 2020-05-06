@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#a0b0ee"
+    tools:context=".PermissionActivity">
+
+    <TextView
+        android:id="@+id/permtext"
+        android:layout_width="350dp"
+        android:layout_height="117dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="У вас не выданы разрешения!"
+        android:textSize="40sp"
+        android:textStyle="bold"></TextView>
+
+    <Button
+        android:id="@+id/usage"
+        android:text="История"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/permtext"
+        android:layout_height="wrap_content"></Button>
+
+    <Button
+        android:id="@+id/dont"
+        android:text="Беззвучка"
+        android:layout_width="wrap_content"
+        android:layout_above="@+id/permtext"
+        android:layout_toEndOf="@+id/usage"
+        android:layout_height="wrap_content"></Button>
+
+    <Button
+        android:id="@+id/vspliv"
+        android:text="всплывающие окна"
+        android:layout_width="wrap_content"
+        android:layout_above="@+id/permtext"
+        android:layout_toEndOf="@+id/dont"
+        android:layout_height="wrap_content"></Button>
+
+</RelativeLayout>

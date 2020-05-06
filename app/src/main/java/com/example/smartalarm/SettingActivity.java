@@ -28,31 +28,5 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button button = findViewById(R.id.dont);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                startActivity(intent);
-            }
-        });
-        Button button2 = findViewById(R.id.usage);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-                startActivity(intent);
-            }
-        });
-        Button button3 = findViewById(R.id.vspliv);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 }
