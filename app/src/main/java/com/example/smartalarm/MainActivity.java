@@ -6,6 +6,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import android.app.AlarmManager;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.app.Notification;
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String CHANNEL1ID = "channel1";
     private final Context context = this;
 
+
     public int minutes;
+    public SharedPreferences sharedPref;
     public int hours;
 
     private NotificationManagerCompat notificationManagerCompat;
@@ -74,8 +77,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        Intent permissionIntent = new Intent (this, PermissionActivity.class);
-        startActivity(permissionIntent);
+        sharedPref = this.getPreferences(Context.MODE_APPEND);
+        if(!sharedPref.contains("true")) {
+            Intent permissionIntent = new Intent(this, PermissionActivity.class);
+            startActivity(permissionIntent);
+        }
+
 
         //рингтон
         final Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
