@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class WalkActivity extends AppCompatActivity implements SensorEventListener {
     private ProgressBar progressBar;
@@ -63,6 +66,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         volume=audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
         maxVolume=audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume-2, 0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             ringtone.setLooping(true);
         }
@@ -118,6 +122,15 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FloatingActionButton floatingActionButton = findViewById(R.id.fly);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         ImageView view2 = findViewById(R.id.animView2);
         AnimationDrawable animation2 = (AnimationDrawable) view2.getBackground();
         animation2.setOneShot(false);
@@ -134,6 +147,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
             Toast.makeText(this, "У вас есть счётчик шагов", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "У вас нет счётчика шагов :c", Toast.LENGTH_SHORT).show();
+            floatingActionButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -143,10 +157,10 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(1000);
-        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume, 0);
         Log.d("MainActivity", "Сенсор изменился");
         float[] values = event.values;
         if (counter >= 3) {
+            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume/2, 0);
             int valuesone = (int) (values[0]);
             int nowprogress = progressBar.getProgress() + valuesone;
             progressBar.setProgress(nowprogress);

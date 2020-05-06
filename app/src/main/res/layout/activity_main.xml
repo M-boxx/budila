@@ -13,14 +13,14 @@
         android:id="@+id/texting"
         android:layout_width="304dp"
         android:layout_height="151dp"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:layout_marginLeft="30dp"
         android:text="Пройдись и шкала заполнится!"
         android:textSize="40dp"
         android:textStyle="italic"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="3dp"></TextView>
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="2dp" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -50,5 +50,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="#f24d00"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+        tools:ignore="MissingConstraints,VectorDrawableCompat"
+        tools:layout_editor_absoluteX="356dp"
+        tools:layout_editor_absoluteY="550dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

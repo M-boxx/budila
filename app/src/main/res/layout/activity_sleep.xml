@@ -35,7 +35,7 @@ tools:context=".ActivityToSleep">
 
     <Button
         android:id="@+id/buttonback"
-        android:text="Вернуться"
+        android:text="Осталось 10 секунд для выхода"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_margin="40dp"
