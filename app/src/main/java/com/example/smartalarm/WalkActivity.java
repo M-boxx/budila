@@ -87,7 +87,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         progressBar = (ProgressBar) findViewById(R.id.progress);
         progressBar.setVisibility(ProgressBar.VISIBLE);
         progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.vertical));
-        progressBar.setMax(50000);
+        progressBar.setMax(5000);
         final TextView textView = findViewById(R.id.texting);
     }
     @Override
@@ -160,7 +160,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         Log.d("MainActivity", "Сенсор изменился");
         float[] values = event.values;
         if (counter >= 3) {
-            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume/2, 0);
+            audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume/3*2, 0);
             int valuesone = (int) (values[0]);
             int nowprogress = progressBar.getProgress() + valuesone;
             progressBar.setProgress(nowprogress);

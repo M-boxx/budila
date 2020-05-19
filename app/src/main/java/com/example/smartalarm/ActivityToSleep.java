@@ -38,7 +38,18 @@ public class ActivityToSleep extends AppCompatActivity {
         setContentView(R.layout.activity_sleep);
 
         TextView wtextView =(TextView) findViewById(R.id.timetext);
-        wtextView.setText(Integer.toString(MainActivity.instance().hours)+":"+Integer.toString(MainActivity.instance().minutes));
+        int hours = MainActivity.instance().hours;
+        int minute = MainActivity.instance().minutes;
+        wtextView.append("подъем в \n");
+        if(hours<10){
+            wtextView.append("0");
+        }
+        wtextView.append(Integer.toString(hours));
+        wtextView.append(":");
+        if(minute<10){
+            wtextView.append("0");
+        }
+        wtextView.append(Integer.toString(minute));
 
         startService(new Intent(this, ForegroundService.class));
         final Handler handler = new Handler();

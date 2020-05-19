@@ -6,6 +6,14 @@
     android:background="#a0b0ee"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/animView"
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/catsleep"
+        android:clickable="true" />
 
     <TimePicker
         android:id="@+id/alarmTimePicker"
@@ -17,28 +25,14 @@
         android:layout_marginTop="0dp"
         android:numbersBackgroundColor="@android:color/white" />
 
-    <Button
-        android:layout_width="131dp"
-        android:layout_height="85dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="142dp"
-        android:layout_marginLeft="142dp"
-        android:layout_marginBottom="94dp"
-        android:text="Ega"
-        android:background="@drawable/roundshape"
-        android:visibility="invisible"
-        android:id="@+id/button"></Button>
-
     <ToggleButton
         android:id="@+id/alarmToggle"
         android:layout_width="99dp"
         android:layout_height="58dp"
+        android:text="off"
         android:layout_below="@+id/alarmTimePicker"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="-16dp"
         android:onClick="onToggleClicked" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,15 +47,4 @@
         android:layout_marginRight="8dp"
         android:layout_alignParentRight="true"
         tools:ignore="VectorDrawableCompat" />
-
-    <ImageView
-        android:id="@+id/animView"
-        android:layout_width="match_parent"
-        android:layout_height="349dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
-        android:clickable="true"
-        android:background="@drawable/catsleep" />
-
 </RelativeLayout>

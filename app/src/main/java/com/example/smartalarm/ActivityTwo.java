@@ -44,6 +44,7 @@ public class ActivityTwo extends AppCompatActivity {
                     Toast.makeText(context, "Вам осталось " + counter + " нажатий", Toast.LENGTH_SHORT).show();
                     counter--;
                 } else {
+                    Toast.makeText(context, "Нажатий достаточно!", Toast.LENGTH_SHORT).show();
                     if(WalkActivity.instance()!=null){
                         WalkActivity.instance().stopLoop();
                         Intent intent = new Intent(context, WalkActivity.class);
@@ -51,7 +52,6 @@ public class ActivityTwo extends AppCompatActivity {
                         startActivity(intent);
                     } else{
                         Intent intent = new Intent(context, ActivityToSleep.class);
-                        counter=random.nextInt(41)+10;
                         startActivity(intent);
                     }
                 }

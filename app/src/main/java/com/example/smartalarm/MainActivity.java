@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //дефолт
-        getSupportActionBar().hide();
         final Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
@@ -82,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             Intent permissionIntent = new Intent(this, PermissionActivity.class);
             startActivity(permissionIntent);
         }
-
 
         //рингтон
         final Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
@@ -98,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         notificationManagerCompat = NotificationManagerCompat.from(this);
         alarmTimePicker = (TimePicker) findViewById(R.id.alarmTimePicker);
         alarmToggle = findViewById(R.id.alarmToggle);
+        alarmToggle.setText("off");
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.fly);
@@ -108,23 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
-        //кнопка Ega
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Notification notification = new NotificationCompat.Builder(context, CHANNEL1ID)
-                        .setSmallIcon(R.drawable.ic_1)
-                        .setContentTitle("Ego")
-                        .setContentText("Ega")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                        .setSound(alarmUri)
-                        .build();
-                notificationManagerCompat.notify(1, notification);
-            }
-        });
-
     }
 
     private void createNotificationChannels() {
@@ -141,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onToggleClicked(View view) {
         if (((ToggleButton) view).isChecked()) {
+            alarmToggle.setText("ON");
             Log.d("MyActivity", "Alarm On");
             Calendar calendar = Calendar.getInstance();
             long now = Calendar.getInstance().getTimeInMillis();

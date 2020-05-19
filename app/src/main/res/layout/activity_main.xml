@@ -11,15 +11,15 @@
 
     <TextView
         android:id="@+id/texting"
-        android:layout_width="304dp"
-        android:layout_height="151dp"
+        android:layout_width="407dp"
+        android:layout_height="182dp"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:text="Пройдись и шкала заполнится!"
-        android:textSize="40dp"
+        android:textSize="50dp"
         android:textStyle="italic"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteX="56dp"
         tools:layout_editor_absoluteY="2dp" />
 
     <ProgressBar
@@ -40,17 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.313" />
-
-    <ImageView
-        android:id="@+id/animView2"
-        android:layout_width="351dp"
-        android:layout_height="255dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/catwalk"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fly"
         android:layout_width="wrap_content"
@@ -62,4 +51,14 @@
         tools:layout_editor_absoluteX="356dp"
         tools:layout_editor_absoluteY="550dp" />
 
+    <ImageView
+        android:id="@+id/animView2"
+        android:layout_width="388dp"
+        android:layout_height="311dp"
+        android:layout_margin="30dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/catwalk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

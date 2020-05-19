@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">SmartAlarm</string>
+    <string name="app_name">CatAlarm</string>
     <string name="title_activity_walk">WalkActivity</string>
     <string name="title_activity_two">ActivityTwo</string>
     <!-- Strings used for fragments for navigation -->

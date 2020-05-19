@@ -62,12 +62,14 @@ public class ForegroundService extends Service {
         new Thread(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             public void run() {
+                boolean checker = false;
                 while (whiler) {
                     try {
                         List<UsageStats> lastList = UStats.getUsageStatsList(context);
                         if (counter == 1) {
                             firstList = lastList;
                             counter--;
+                            continue;
                         }
                         for (int i = 0; i < lastList.size(); i++) {
                             if (!whiler) {
@@ -75,15 +77,21 @@ public class ForegroundService extends Service {
                             }
                             if (firstList.get(i).getTotalTimeInForeground() != lastList.get(i).getTotalTimeInForeground() && !firstList.get(i).getPackageName().equals("com.example.smartalarm")) {
                                 Log.d("ALAAAARM", "ALARM!");
-                                vibrator.vibrate(3000);
-                                counter++;
-                                Intent intent = new Intent(context, ActivityTwo.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                break;
+                                if(checker) {
+                                    vibrator.vibrate(3000);
+                                    counter++;
+                                    checker = false;
+                                    Intent intent = new Intent(context, ActivityTwo.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    break;
+                                } else {
+                                    checker = true;
+                                    break;
+                                }
                             }
                         }
-                        TimeUnit.SECONDS.sleep(8);
+                        TimeUnit.SECONDS.sleep(6);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -103,9 +111,9 @@ public class ForegroundService extends Service {
         }
 
         return new NotificationCompat.Builder(this, channelId)
-                .setContentTitle("Слежу за твоим сном")
-                .setTicker("Не заходи в другие приложения")
-                .setContentText("Спи!")
+                .setContentTitle("AndroidMonks Sticker")
+                .setTicker("AndroidMonks Sticker")
+                .setContentText("Example")
                 .setSmallIcon(notificationIconResource)
                 .setOngoing(true).build();
     }
