@@ -88,7 +88,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         progressBar.setVisibility(ProgressBar.VISIBLE);
         progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.vertical));
         progressBar.setMax(5000);
-        final TextView textView = findViewById(R.id.texting);
     }
     @Override
     public void onPause(){
@@ -126,6 +125,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopLoop();
                 Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
             }

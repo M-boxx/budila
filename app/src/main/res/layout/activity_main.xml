@@ -3,24 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#fff4a7"
     android:layout_height="match_parent"
+    android:background="#fff4a7"
 
     tools:context=".MainActivity">
 
 
     <TextView
         android:id="@+id/texting"
-        android:layout_width="407dp"
-        android:layout_height="182dp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="365dp"
         android:gravity="center_horizontal"
         android:text="Пройдись и шкала заполнится!"
         android:textSize="50dp"
         android:textStyle="italic"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="2dp" />
+        app:layout_constraintBottom_toTopOf="@+id/fly"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -40,16 +42,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.313" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:backgroundTint="#f24d00"
+        android:layout_marginStart="356dp"
+        android:layout_marginBottom="54dp"
         android:visibility="invisible"
+        app:backgroundTint="#f24d00"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texting"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp"
-        tools:ignore="MissingConstraints,VectorDrawableCompat"
-        tools:layout_editor_absoluteX="356dp"
-        tools:layout_editor_absoluteY="550dp" />
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
     <ImageView
         android:id="@+id/animView2"

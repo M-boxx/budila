@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
@@ -62,7 +64,6 @@ public class ForegroundService extends Service {
         new Thread(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             public void run() {
-                boolean checker = false;
                 while (whiler) {
                     try {
                         List<UsageStats> lastList = UStats.getUsageStatsList(context);
@@ -71,24 +72,21 @@ public class ForegroundService extends Service {
                             counter--;
                             continue;
                         }
+                        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                        boolean result= powerManager.isInteractive()|| powerManager.isScreenOn();
+                        Log.d("CheckScreen", Boolean.toString(result));
                         for (int i = 0; i < lastList.size(); i++) {
                             if (!whiler) {
                                 break;
                             }
-                            if (firstList.get(i).getTotalTimeInForeground() != lastList.get(i).getTotalTimeInForeground() && !firstList.get(i).getPackageName().equals("com.example.smartalarm")) {
-                                Log.d("ALAAAARM", "ALARM!");
-                                if(checker) {
+                            if (lastList.get(i).getTotalTimeInForeground() - firstList.get(i).getTotalTimeInForeground()>5000 && !firstList.get(i).getPackageName().equals("com.example.smartalarm") && result) {
+                                Log.d("ALAAAARM", lastList.get(i).getPackageName());
                                     vibrator.vibrate(3000);
                                     counter++;
-                                    checker = false;
                                     Intent intent = new Intent(context, ActivityTwo.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                     break;
-                                } else {
-                                    checker = true;
-                                    break;
-                                }
                             }
                         }
                         TimeUnit.SECONDS.sleep(6);

@@ -28,6 +28,11 @@ public class ActivityTwo extends AppCompatActivity {
     public void onBackPressed() {
         Toast.makeText(this, "Во время наказания возврат невозможен", Toast.LENGTH_SHORT).show();
     }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        counter=random.nextInt(41)+10;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +40,6 @@ public class ActivityTwo extends AppCompatActivity {
         setContentView(R.layout.activity_two);
         Button button = findViewById(R.id.angry_button);
         context=this;
-        counter=random.nextInt(41)+10;
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,9 +61,5 @@ public class ActivityTwo extends AppCompatActivity {
                 }
                 }
         });
-    }
-    void startAlarm(){
-        Intent intent = new Intent(this, WalkActivity.class);
-        startActivity(intent);
     }
 }

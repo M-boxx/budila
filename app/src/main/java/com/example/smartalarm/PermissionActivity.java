@@ -18,6 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class PermissionActivity extends AppCompatActivity {
     Button button;
     Button button2;
@@ -26,7 +30,7 @@ public class PermissionActivity extends AppCompatActivity {
     private boolean first;
     private boolean second;
     private boolean third;
-
+    final Context context = this;
     @Override
     public void onBackPressed() {
         Toast.makeText(this, "Сперва необходимо выдать разрешения!", Toast.LENGTH_SHORT).show();
@@ -53,6 +57,7 @@ public class PermissionActivity extends AppCompatActivity {
                 second=false;
             }
         }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (isAccessGrantedu(android.Manifest.permission.SYSTEM_ALERT_WINDOW)) {
                 button3.setVisibility(View.GONE);
@@ -62,6 +67,7 @@ public class PermissionActivity extends AppCompatActivity {
                 third=false;
             }
         }
+
         if(first && second && third){
             SharedPreferences sharedPref = MainActivity.instance().sharedPref;
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -100,8 +106,12 @@ public class PermissionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                    startActivity(intent);
+                    if(isXiaomi()) {
+                        goToXiaomiPermissions();
+                    }else{
+                        Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -142,5 +152,38 @@ public class PermissionActivity extends AppCompatActivity {
             granted = (mode == AppOpsManager.MODE_ALLOWED);
         }
         return granted;
+    }
+
+    boolean isXiaomi() {
+        return getSystemProperty("ro.miui.ui.version.name");
+    }
+
+    void goToXiaomiPermissions() {
+        Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
+        intent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity");
+        intent.putExtra("extra_pkgname", context.getPackageName());
+        startActivity(intent);
+    }
+
+    private boolean getSystemProperty(String propName) {
+        String line=null;
+        BufferedReader input = null;
+        try {
+            java.lang.Process p = Runtime.getRuntime().exec("getprop " + propName);
+            input = new BufferedReader(new InputStreamReader(p.getInputStream()), 1024);
+            line = input.readLine();
+            input.close();
+        } catch (IOException ex) {
+            return false;
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return !line.isEmpty();
     }
 }
