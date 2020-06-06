@@ -11,16 +11,17 @@
 
     <TextView
         android:id="@+id/texting"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="365dp"
+        android:layout_marginBottom="344dp"
         android:gravity="center_horizontal"
         android:text="Пройдись и шкала заполнится!"
         android:textSize="50dp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/fly"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,37 +35,35 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="121dp"
         android:indeterminate="false"
         android:rotation="90"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="356dp"
-        android:layout_marginBottom="54dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="31dp"
         android:visibility="invisible"
         app:backgroundTint="#f24d00"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/animView2"
         app:layout_constraintTop_toBottomOf="@+id/texting"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp"
         tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
     <ImageView
         android:id="@+id/animView2"
-        android:layout_width="388dp"
+        android:layout_width="0dp"
         android:layout_height="311dp"
-        android:layout_margin="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="11dp"
         android:background="@drawable/catwalk"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/fly"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

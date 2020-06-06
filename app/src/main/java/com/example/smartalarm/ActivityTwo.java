@@ -40,7 +40,6 @@ public class ActivityTwo extends AppCompatActivity {
         setContentView(R.layout.activity_two);
         Button button = findViewById(R.id.angry_button);
         context=this;
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

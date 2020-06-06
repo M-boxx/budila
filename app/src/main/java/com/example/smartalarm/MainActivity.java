@@ -2,14 +2,12 @@ package com.example.smartalarm;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import android.app.AlarmManager;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -21,7 +19,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
@@ -103,8 +100,10 @@ public class MainActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent2 = new Intent(context, SettingActivity.class);
-                startActivity(intent2);
+                Intent questionIntent = new Intent(MainActivity.this,
+                        Setting2Activity.class);
+                startActivityForResult(questionIntent, 0);
+                overridePendingTransition(0, R.anim.diagonal);
             }
         });
     }

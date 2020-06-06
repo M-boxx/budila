@@ -1,10 +1,10 @@
 package com.example.smartalarm;
 
-import android.app.Activity;
-import android.app.AlarmManager;
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -16,21 +16,17 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,6 +40,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     private AudioManager audioManager;
     private int volume;
     private int maxVolume;
+    private final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
     private static com.example.smartalarm.WalkActivity inst;
     public static com.example.smartalarm.WalkActivity instance() {
@@ -87,7 +84,9 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         progressBar = (ProgressBar) findViewById(R.id.progress);
         progressBar.setVisibility(ProgressBar.VISIBLE);
         progressBar.setProgressDrawable(getResources().getDrawable(R.drawable.vertical));
+        if(prefs.getBoolean("сложность", false))
         progressBar.setMax(5000);
+        else progressBar.setMax(2500);
     }
     @Override
     public void onPause(){
@@ -97,7 +96,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     }
     @Override
     public void onDestroy(){
-        ringtone.stop();
         super.onDestroy();
         sensorManager.unregisterListener(this);
         progressBar.setProgress(0);
@@ -114,6 +112,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final Context context = this;
@@ -125,9 +124,17 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopLoop();
-                Intent intent = new Intent(context, MainActivity.class);
+                Toast.makeText(WalkActivity.this, "Ты молодец! Хорошего дня!", Toast.LENGTH_SHORT).show();
+                stopService(new Intent(WalkActivity.this, ForegroundService.class));
+                Intent intent = new Intent(WalkActivity.this, MainActivity.class);
+                inst=null;
+                audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, volume, 0);
+                progressBar.setProgress(0);
                 startActivity(intent);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    ringtone.setLooping(false);
+                }
+                finish();
             }
         });
 
@@ -155,8 +162,10 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     //имплементация методов
     @Override
     public void onSensorChanged(SensorEvent event) {
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        vibrator.vibrate(1000);
+        if(prefs.getBoolean("вибрация", true)) {
+            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(1000);
+        }
         Log.d("MainActivity", "Сенсор изменился");
         float[] values = event.values;
         if (counter >= 3) {

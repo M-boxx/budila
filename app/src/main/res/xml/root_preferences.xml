@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="Настройки прогулки">
+
+        <SwitchPreferenceCompat
+            app:key="сложность"
+            app:title="Усиленный уровень сложности" />
+        <SwitchPreferenceCompat
+            app:key="вибрация"
+            app:defaultValue="true"
+            app:title="Вибрация при прогулке" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

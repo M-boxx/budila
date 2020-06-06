@@ -1,50 +1,61 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#a0b0ee"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/animView"
-        android:layout_width="match_parent"
-        android:layout_height="345dp"
+        android:layout_width="0dp"
+        android:layout_height="292dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/catsleep"
-        android:clickable="true" />
+        android:clickable="true"
+        app:layout_constraintStart_toEndOf="@+id/alarmToggle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TimePicker
         android:id="@+id/alarmTimePicker"
         style="@style/ega"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:numbersBackgroundColor="@android:color/white" />
+        android:layout_height="355dp"
+        android:numbersBackgroundColor="@android:color/white"
+        app:layout_constraintHeight_percent="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
         android:id="@+id/alarmToggle"
         android:layout_width="99dp"
         android:layout_height="58dp"
-        android:text="off"
         android:layout_below="@+id/alarmTimePicker"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-16dp"
-        android:onClick="onToggleClicked" />
+        android:layout_marginTop="352dp"
+        android:onClick="onToggleClicked"
+        android:text="off"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:backgroundTint="#4d79ff"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="6dp"
-        app:srcCompat="@drawable/ic_brightness_low_black_24dp"
-        android:layout_marginRight="8dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="18dp"
+        app:backgroundTint="#4d79ff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarmTimePicker"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_brightness_low_black_24dp"
         tools:ignore="VectorDrawableCompat" />
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
