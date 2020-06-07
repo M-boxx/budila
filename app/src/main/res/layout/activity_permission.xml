@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/permtext"
         android:layout_width="wrap_content"
-        android:layout_height="199dp"
+        android:layout_height="189dp"
         android:layout_centerInParent="true"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
@@ -20,7 +20,7 @@
         android:layout_marginBottom="30dp"
         android:gravity="center"
         android:text="У вас не выданы разрешения!"
-        android:textSize="40sp"
+        android:textSize="34sp"
         android:textStyle="bold"></TextView>
 
     <Button
@@ -46,5 +46,13 @@
         android:layout_above="@+id/permtext"
         android:layout_toEndOf="@+id/dont"
         android:layout_height="wrap_content"></Button>
+
+    <ImageView
+        android:id="@+id/animView"
+        android:layout_marginEnd="30dp"
+        android:layout_width="218dp"
+        android:layout_height="211dp"
+        android:layout_below="@id/permtext"
+        android:background="@drawable/settingcat"></ImageView>
 
 </RelativeLayout>
