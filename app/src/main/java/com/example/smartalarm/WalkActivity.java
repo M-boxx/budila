@@ -40,7 +40,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     private AudioManager audioManager;
     private int volume;
     private int maxVolume;
-    private final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+    private SharedPreferences prefs;
 
     private static com.example.smartalarm.WalkActivity inst;
     public static com.example.smartalarm.WalkActivity instance() {
@@ -56,30 +56,9 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onStart() {
         super.onStart();
-        final Context context = this;
-        inst=this;
-        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        changeInterruptionFiler(NotificationManager.INTERRUPTION_FILTER_ALL);
-        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        volume=audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
-        maxVolume=audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
-        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume-2, 0);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            ringtone.setLooping(true);
-        }
-
-        if(ActivityToSleep.instance()!=null){
-            ActivityToSleep.instance().finish();
-        }
         //создание сенсора
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         gps = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        if (gps != null) {
-            sensorManager.registerListener(this, gps, sensorManager.SENSOR_DELAY_FASTEST);
-            Toast.makeText(this, "У вас есть счётчик шагов", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "У вас нет счётчика шагов :c", Toast.LENGTH_SHORT).show();
-        }
         //прогрессбар
         progressBar = (ProgressBar) findViewById(R.id.progress);
         progressBar.setVisibility(ProgressBar.VISIBLE);
@@ -91,8 +70,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onPause(){
         super.onPause();
-        sensorManager.unregisterListener(this);
-        progressBar.setProgress(0);
     }
     @Override
     public void onDestroy(){
@@ -115,11 +92,25 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         final Context context = this;
         //дефолт
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //gromkost
+        inst=this;
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        changeInterruptionFiler(NotificationManager.INTERRUPTION_FILTER_ALL);
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        volume=audioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
+        maxVolume=audioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
+        audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, maxVolume-2, 0);
 
+        if(ActivityToSleep.instance()!=null){
+            ActivityToSleep.instance().finish();
+        }
+
+        //knopka
         FloatingActionButton floatingActionButton = findViewById(R.id.fly);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +137,11 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         Uri alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(context, alarmUri);
         ringtone.play();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ringtone.setLooping(true);
+        }
+
         //создание сенсора
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         gps = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
